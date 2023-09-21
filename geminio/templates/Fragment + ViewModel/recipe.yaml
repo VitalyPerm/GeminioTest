@@ -48,7 +48,7 @@ globals:
 
 recipe:
   - instantiateAndOpen:
-      from: root/src/app_package/Component.kt.ftl
+      from: root/src/app_package/Fragment.kt.ftl
       to: ${srcOut}/${fragmentName}.kt
 
   - instantiate:
