@@ -1,0 +1,36 @@
+requiredParams:
+  name: Component
+  description: Creates component with implementation and composable function
+
+widgets:
+  - stringParameter:
+      id: componentPrefix
+      name: Component Prefix
+      help: Prefix of the fragment and other classes to create
+      constraints:
+        - nonempty
+        - unique
+        - class
+      default: Blank
+
+globals:
+  - stringParameter:
+      id: fragmentName
+      value: ${componentPrefix}Fragment
+
+  - stringParameter:
+      id: fragmentLayoutResName
+      value: ${fragmentName.fragmentToLayout()}
+
+  - stringParameter:
+      id: viewModelName
+      value: ${componentPrefix}ViewModel
+
+recipe:
+  - instantiateAndOpen:
+      from: root/src/app_package/Fragment.kt.ftl
+      to: ${srcOut}/${fragmentName}.kt
+
+  - instantiate:
+      from: root/res/layout/fragment.xml.ftl
+      to: ${resOut}/layout/${fragmentLayoutResName}.xml
